@@ -10,9 +10,7 @@ from time import sleep
 class InstaBot:
     BASE_URL = "https://www.instagram.com/"
 
-    def __init__(self, username, password):
-        self.username = username
-        self.password = password
+    def __init__(self):
         self.driver = Chrome()
         self.wait = WebDriverWait(self.driver, 15)
         self.driver.maximize_window()
@@ -20,12 +18,12 @@ class InstaBot:
         self.driver.get(self.BASE_URL)
 
 
-    def login(self):
+    def login(self, username, password):
         USERNAME_FIELD = "//input[@type='text']"
         PASSWORD_FIELD = "//input[@type='password']"
 
-        self.driver.find_element_by_xpath(USERNAME_FIELD).send_keys(self.username)
-        self.driver.find_element_by_xpath(PASSWORD_FIELD).send_keys(self.password)
+        self.driver.find_element_by_xpath(USERNAME_FIELD).send_keys(username)
+        self.driver.find_element_by_xpath(PASSWORD_FIELD).send_keys(password)
         self.driver.find_element_by_xpath(PASSWORD_FIELD).send_keys(Keys.ENTER)
         self.wait.until(EC.url_contains("accounts/"))
 
@@ -56,7 +54,7 @@ class InstaBot:
 
 
 target_account = ''  # username of the account you want to access
-bot = InstaBot(secret.USERNAME, secret.PASSWORD)
-bot.login()
+bot = InstaBot()
+bot.login(secret.USERNAME, secret.PASSWORD)
 bot.follow(target_account)
 bot.close()
