@@ -29,7 +29,8 @@ class InstaBot:
 
 
     def follow(self, target, quantity=10):
-        account_url = self.BASE_URL + f"{target.lower()}" + '/'
+        target = target.strip().lower()
+        account_url = self.BASE_URL + f"{target}" + '/'
         self.driver.get(account_url)
         self.wait.until(EC.title_contains(target))
 
