@@ -48,7 +48,7 @@ class InstaBot:
             sleep(1)
 
 
-    def close(self):
+    def stop(self):
         self.driver.close()
 
 
@@ -57,4 +57,4 @@ target_account = ''  # username of the account you want to access
 bot = InstaBot()
 bot.login(secret.USERNAME, secret.PASSWORD)
 bot.follow(target_account)
-bot.close()
+bot.stop()
